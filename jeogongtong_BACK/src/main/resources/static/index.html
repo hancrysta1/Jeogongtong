@@ -4,18 +4,19 @@
     <meta charset="UTF-8">
     <title>Firebase Google Login Test</title>
     <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.6.0/kakao.min.js" integrity="sha384-6MFdIr0zOira1CHQkedUqJVql0YtcZA1P0nbPrQYJXVJZUkTk/oX4U9GhUIs3/z8" crossorigin="anonymous"></script>
+    <script src="/env.js"></script>
     <script type="module">
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js';
         import { getAnalytics } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics.js';
         import { getAuth, signInWithPopup, GoogleAuthProvider, OAuthProvider } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js';
 
         const firebaseConfig = {
-            apiKey: "AIzaSyCegHvQKk-9XZEDmHvJo5pjynH_LHRjCN0",
-            authDomain: "jeogongtong.firebaseapp.com",
-            projectId: "jeogongtong",
-            storageBucket: "jeogongtong.appspot.com",
-            messagingSenderId: "1075717257121",
-            appId: "1:1075717257121:android:fbcc5fd643c7db24e6bde0"
+            apiKey: window.__ENV__.FIREBASE_API_KEY,
+            authDomain: window.__ENV__.FIREBASE_AUTH_DOMAIN,
+            projectId: window.__ENV__.FIREBASE_PROJECT_ID,
+            storageBucket: window.__ENV__.FIREBASE_STORAGE_BUCKET,
+            messagingSenderId: window.__ENV__.FIREBASE_MESSAGING_SENDER_ID,
+            appId: window.__ENV__.FIREBASE_APP_ID
         };
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
@@ -61,7 +62,7 @@
 
 
     // Kakao SDK 초기화
-    Kakao.init('18d7013db3d43c0e8fd93e548d53a178');
+    Kakao.init(window.__ENV__.KAKAO_JS_KEY);
 
 
     // 카카오 로그인 버튼 클릭 이벤트 핸들러

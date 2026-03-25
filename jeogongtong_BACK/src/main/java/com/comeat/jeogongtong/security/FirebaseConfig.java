@@ -15,6 +15,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 
@@ -22,13 +23,13 @@ import org.springframework.security.core.AuthenticationException;
 @Configuration
 @RequiredArgsConstructor
 public class FirebaseConfig{
-    
+
+    @Value("${firebase.credentials.path}")
+    private String firebaseCredentialsPath;
+
     @Bean
     public FirebaseAuth firebaseAuth() throws IOException {
-        // FileInputStream serviceAccount =
-        //         new FileInputStream("classpath:jeogongtong-firebase-adminsdk.json");
-
-        InputStream serviceAccount = getClass().getResourceAsStream("/jeogongtong-firebase-adminsdk.json");
+        InputStream serviceAccount = new FileInputStream(firebaseCredentialsPath);
 
         FirebaseOptions options = new FirebaseOptions.Builder()
                 .setCredentials(GoogleCredentials.fromStream(serviceAccount))
@@ -37,13 +38,6 @@ public class FirebaseConfig{
         FirebaseApp.initializeApp(options);
 
         return FirebaseAuth.getInstance();
-    }
-
-
-    @Bean
-    public FirebaseAuth getFirebaseAuth() throws IOException {
-        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-        return firebaseAuth;
     }
 
 //

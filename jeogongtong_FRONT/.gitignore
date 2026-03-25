@@ -17,6 +17,7 @@ migrate_working_dir/
 .android/app/google-services.json
 /ios/Runner/GoogleService-info.plist
 .ios/Runner/GoogleService-info.plist
+/ios/firebase_app_id_file.json
 
 # IntelliJ related
 *.iml
